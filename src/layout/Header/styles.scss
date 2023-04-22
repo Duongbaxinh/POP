@@ -1,0 +1,120 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500&display=swap");
+@import "../../assets/scss/mixin/mixin.scss";
+@import "../../assets/scss/variaty/index.scss";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.action {
+  color: red;
+}
+.header {
+  position: fixed;
+  width: 100%;
+  height: 60px;
+  @include displayFlex($justy: flex-start);
+  gap: 20px;
+  @include padding(0 64px);
+
+  background-color: rgba($bg-secondary, $alpha: 0.8);
+  z-index: 999;
+  &__left {
+    @include displayFlex($justy: flex-start);
+    gap: 20px;
+  }
+  &__logo {
+    @include customLogo;
+  }
+  &__menu {
+    width: 445px;
+    list-style: none;
+    @include displayFlex($justy: flex-start);
+    font-family: "roboto";
+    cursor: pointer;
+    color: $white;
+    gap: 16px;
+    visibility: visible;
+    & li:hover {
+      color: $red;
+    }
+    @include maxWith($lg) {
+      position: absolute;
+      @include displayFlex($direc: column, $align: flex-start);
+      border-radius: 10px;
+      width: 203px;
+      top: 70px;
+      right: 60px;
+      @include padding(10px 20px);
+      background-color: $black-light;
+      &::before {
+        position: absolute;
+        content: "";
+        width: 15px;
+        height: 15px;
+        top: -5px;
+        right: 10px;
+        background-color: $black-light;
+        transform: rotate(45deg);
+        z-index: -9;
+      }
+    }
+  }
+  &__menu-icon {
+    display: none;
+    color: $white;
+    @include maxWith($lg) {
+      display: block;
+    }
+  }
+  &__right {
+    flex-grow: 1;
+    @include displayFlex($justy: flex-start);
+    gap: 15px;
+    @include maxWith($lg) {
+      justify-content: flex-end;
+    }
+  }
+  &__input {
+    @include displayFlex($justy: flex-start);
+    gap: 10px;
+    height: 40px;
+    background-color: rgba($black, $alpha: 0.5);
+    border-radius: 50px;
+    @include maxWith($lg) {
+      width: 40%;
+    }
+    & input {
+      background-color: transparent;
+      width: 80%;
+      @include padding(8px 0px 8px 16px);
+      border: 0;
+      outline: none;
+      color: $white;
+      font-size: 15px;
+      &::placeholder {
+        color: $white;
+      }
+      @include maxWith($lg) {
+        flex-grow: 1;
+      }
+    }
+  }
+  &__btn {
+    @include displayFlex();
+    gap: 10px;
+  }
+  &__btn-left {
+    @include button($color: $red, $boder: 1px);
+  }
+
+  &__btn-right {
+    @include button($color_bg: $red, $color: $white);
+  }
+  &__user {
+    width: 45px;
+    height: 45px;
+    @include circle();
+  }
+}
