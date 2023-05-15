@@ -5,25 +5,22 @@ import { red } from "@mui/material/colors";
 MyTextFile.propTypes = {};
 
 function MyTextFile(props) {
-  const { placeholder, VisibilityIcon, typeInput } = props;
+  const { placeholder, VisibilityIcon, typeInput, handleEmail, hepper } = props;
   const theme = useTheme();
   const [password, setPassword] = useState(true);
   const [value, setValue] = useState("");
   const handlePassword = () => {
     setPassword(!password);
-    console.log(password);
   };
-  const handleValude = (e) => {
-    setValue(e.target.value);
-  };
+
   return (
     <TextField
       fullWidth
       size="small"
       placeholder={`${placeholder}`}
-      value={value}
-      onChange={(e) => handleValude(e)}
+      onChange={handleEmail}
       type={`${password ? typeInput : "text"}`}
+      helperText={hepper !== "" && hepper}
       InputProps={
         VisibilityIcon
           ? {

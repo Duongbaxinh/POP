@@ -1,9 +1,9 @@
 import React from "react";
 import { SwiperSlide } from "swiper/react";
-import { ShopIcon } from "../../../assets/svg/ShopIcon";
-import dataListImage from "../../../assets/data/dataListImage";
-import Card from "../../atom/Card";
-import Slidecard from "../../atom/Slidecard";
+import { ShopIcon } from "@/assets/svg/ShopIcon";
+import dataListImage from "@/assets/data/dataListImage";
+import Card from "@/components/atom/Card";
+import Slidecard from "@/components/atom/Slidecard";
 
 ShopItem.propTypes = {};
 

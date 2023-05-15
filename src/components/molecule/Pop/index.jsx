@@ -1,7 +1,6 @@
 import AddIcon from "@mui/icons-material/Add";
-import React from "react";
-import POP from "../../../assets/public/image/POP.webp";
 import PlayCircleOutlineOutlinedIcon from "@mui/icons-material/PlayCircleOutlineOutlined";
+import React from "react";
 import "./styles.scss";
 
 Pop.propTypes = {};

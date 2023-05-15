@@ -6,22 +6,53 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { grey, red } from "@mui/material/colors";
-import React from "react";
-import { FacebookIcon } from "../../assets/svg/FacebookIcon";
-import { GoogleIcon } from "../../assets/svg/GoogleIcon";
-import { VisibilityIcon } from "../../assets/svg/VisibilityIcon";
-import { VisibilityOffIcon } from "../../assets/svg/VisibilityOffIcon";
-import Myform from "../../components/atom/Myform";
-import TemplatForm from "../../components/atom/TemplatForm";
-import them from "../../components/theme/them";
-import MyTextFile from "../../components/atom/MytTextFile";
-
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import author from "@/api/author";
+import { FacebookIcon } from "@/assets/svg/FacebookIcon";
+import { GoogleIcon } from "@/assets/svg/GoogleIcon";
+import { VisibilityIcon } from "@/assets/svg/VisibilityIcon";
+import { VisibilityOffIcon } from "@/assets/svg/VisibilityOffIcon";
+import Myform from "@/components/atom/Myform";
+import MyTextFile from "@/components/atom/MytTextFile";
+import TemplatForm from "@/components/atom/TemplatForm";
+import them from "@/components/theme/them";
 function Register() {
   const Sociaty = [
     <FacebookIcon fontSize="large" htmlColor={them.palette.blue.main} />,
     <GoogleIcon fontSize="large" htmlColor={them.palette.blue.main} />,
   ];
+  const navigateTo = useNavigate();
+  const [value, setValue] = useState({
+    email: "",
+    password: "",
+    verifyPassowrd: "",
+  });
+  const handleEmail = (e) => {
+    const v = e.target.value;
+    setValue({ ...value, email: v });
+  };
+  const handlePassowrd = (e) => {
+    const v = e.target.value;
+    setValue({ ...value, password: v });
+  };
+  const handleVerifyPassword = (e) => {
+    const v = e.target.value;
+    setValue({ ...value, verifyPassowrd: v });
+  };
+  const handleSumited = (e) => {
+    e.preventDefault();
+    const register = async () => {
+      try {
+        const { data } = await author.register({ ...value });
+        navigateTo("/login");
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    register();
+  };
+
   return (
     <TemplatForm>
       <Stack
@@ -47,11 +78,15 @@ function Register() {
             Kids.
           </Typography>
         </Stack>
-        <Myform TitleButton={"Đăng Ký"}>
-          <MyTextFile placeholder={"Nhập username hoặc số điện thoại"} />
+        <Myform TitleButton={"Đăng Ký"} handleSumited={handleSumited}>
+          <MyTextFile
+            placeholder={"Nhập username hoặc số điện thoại"}
+            handleEmail={handleEmail}
+          />
           <MyTextFile
             placeholder={"Nhập mật khẩu"}
             typeInput={"password"}
+            handleEmail={handlePassowrd}
             VisibilityIcon={[
               <VisibilityIcon htmlColor={useTheme().palette.my_white.main} />,
               <VisibilityOffIcon
@@ -61,6 +96,7 @@ function Register() {
           />
           <MyTextFile
             placeholder={"Nhập lại mật khẩu"}
+            handleEmail={handleVerifyPassword}
             typeInput={"password"}
             VisibilityIcon={[
               <VisibilityIcon htmlColor={useTheme().palette.my_white.main} />,
@@ -109,8 +145,9 @@ function Register() {
             alignItems="center"
             gap="50px"
           >
-            {Sociaty.map((icon) => (
+            {Sociaty.map((icon, index) => (
               <IconButton
+                key={index}
                 sx={{
                   width: "64px",
                   height: "64px",

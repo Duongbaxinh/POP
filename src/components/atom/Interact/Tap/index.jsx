@@ -1,11 +1,19 @@
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { Box, Icon, IconButton, Link, Stack, Typography } from "@mui/material";
-
+import RefreshIcon from "@mui/icons-material/Refresh";
+import {
+  Box,
+  IconButton,
+  Link,
+  Stack,
+  Typography,
+  colors,
+} from "@mui/material";
 import { grey } from "@mui/material/colors";
 import React, { useState } from "react";
-import them from "../../theme/them";
-import FormTap from "../../atom/fromTap";
-function Tap(props) {
+import FormTap from "../../FromTap";
+import them from "@/components/theme/them";
+function Tap({ data }) {
   const Data = {
     name: `Thám Tử Lừng Danh Conan: Câu Chuyện Về Haibara Ai ~ Chuyến Tàu Sắt
     Bí Ẩn Màu Đen ~ Tập full`,
@@ -90,7 +98,28 @@ function Tap(props) {
           </Box>
         </Stack>
       </Box>
-      <FormTap Data={Data}></FormTap>
+      <Box
+        color={them.palette.my_white.main}
+        sx={{
+          textDecorationLine: "none",
+        }}
+        component={Link}
+        href={`/watch/views/${data.id}`}
+      >
+        <FormTap data={data}>
+          <Stack direction="row" justifyContent="space-between">
+            <Stack direction="row" alignItems="center" justifyContent="center">
+              <RefreshIcon htmlColor={grey} />
+              <Typography variant="body2" component="span">
+                {Data.time}
+              </Typography>
+            </Stack>
+            <IconButton>
+              <AddCircleOutlineIcon htmlColor={them.palette.my_white.main} />
+            </IconButton>
+          </Stack>
+        </FormTap>
+      </Box>
     </Box>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import banner from "../../../assets/data/listBanner";
+import banner from "@/assets/data/listBanner";
 import Seri from "./Seri";
 import "./styles.scss";
 BanerSlide.propTypes = {};
@@ -7,7 +7,6 @@ BanerSlide.propTypes = {};
 function BanerSlide(props) {
   const [visible, setVisible] = useState(1);
   const [timeoutId, setTimeoutId] = useState(null);
-  console.log(banner.length);
   const handleVisible = (id) => {
     clearTimeout(timeoutId);
     setVisible(id);
@@ -20,7 +19,6 @@ function BanerSlide(props) {
       } else {
         clearTimeout(newTimeoutId);
         setVisible(1);
-        setTimeoutId(timeoutId);
       }
     }, 3000);
     setTimeoutId(newTimeoutId);

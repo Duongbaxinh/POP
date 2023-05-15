@@ -24,8 +24,13 @@ function Slidecard(props) {
   const lgPoint = theme.breakpoints.values.lg;
   const smPoint = theme.breakpoints.values.sm;
   const xlPoint = theme.breakpoints.values.xl;
+  /*
+    title tên của slide
+    icon trên title
+    preView số lượng muốn hiển thị
+    nameCard dùng để xử lý chuyển slide
+   */
   const { title, icon, preView, nameCard } = props;
-  console.log(nameCard);
   return (
     <Container
       width="100%"
@@ -97,8 +102,8 @@ function Slidecard(props) {
             slidesPerGroup: 2,
           },
           [smPoint]: {
-            slidesPerView: 3,
-            slidesPerGroup: 3,
+            slidesPerView: 4,
+            slidesPerGroup: 4,
           },
           [lgPoint]: {
             slidesPerView: preView,

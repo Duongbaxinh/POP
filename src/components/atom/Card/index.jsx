@@ -1,11 +1,16 @@
 import { Box, Stack, Typography, useTheme } from "@mui/material";
 import React from "react";
-import BoxCard from "../../atom/BoxCard";
+import BoxCard from "./BoxCard";
 Card.propTypes = {};
 
 function Card(props) {
   const theme = useTheme();
-  const { Urlimage, title, height, form, chapter, anouncement, top } = props;
+  /** Urlimage ảnh nền của card
+     title tiêu đề của card
+     form 
+  */
+  const { Urlimage, title, height, width, form, chapter, anouncement, top } =
+    props;
   const anounce = (anouncement) => {
     return (
       <Stack
@@ -78,28 +83,30 @@ function Card(props) {
 
   return (
     <Box>
-      <BoxCard height={height} position="relative">
-        <img
-          src={Urlimage}
+      <Box>
+        <BoxCard height={height} position="relative">
+          <img
+            src={Urlimage}
+            width="100%"
+            height="100%"
+            style={{ transition: "0.25s ease", borderRadius: "5px" }}
+          />
+          {anouncement && anounce(anouncement)}
+        </BoxCard>
+        {top && topF(top)}
+        <Typography
+          variant="h2"
+          mt="8px"
+          color={theme.palette.my_white.main}
+          textOverflow="ellipsis"
+          overflow="hidden"
           width="100%"
-          height="100%"
-          style={{ transition: "0.25s ease", borderRadius: "5px" }}
-        />
-        {anouncement && anounce(anouncement)}
-      </BoxCard>
-      {top && topF(top)}
-      <Typography
-        variant="h2"
-        mt="8px"
-        color={theme.palette.my_white.main}
-        textOverflow="ellipsis"
-        overflow="hidden"
-        width="100%"
-        whiteSpace="nowrap"
-      >
-        {title}
-      </Typography>
-      {(form || chapter) && chapter1(form, chapter)}
+          whiteSpace="nowrap"
+        >
+          {title}
+        </Typography>
+        {(form || chapter) && chapter1(form, chapter)}
+      </Box>
     </Box>
   );
 }

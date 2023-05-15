@@ -1,18 +1,23 @@
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import React, { useState } from "react";
-import seri from "../../../../assets/data/imagelist";
+import seri from "@/assets/data/imagelist";
 import "./styles.scss";
 
 function Seri(props) {
+  const numberClick = (seri.length * 187) / (5 * (187 + 41 * 2 - 41));
   const [translate, setTranslate] = useState(0);
-  console.log(translate);
+  const [click, setClick] = useState(numberClick);
   const handleTranslateRight = () => {
-    setTranslate(translate - 1183);
+    if (click - 1 > 0) {
+      setTranslate(translate - 5 * (187 + 41 * 2 - 41));
+      setClick(click - 1);
+    }
   };
   const handleTranslateleft = () => {
-    if (translate < 0) {
-      setTranslate(translate + 1183);
+    if (click < numberClick) {
+      setTranslate(translate + 5 * (187 + 41 * 2 - 41));
+      setClick(click + 1);
     }
   };
   return (

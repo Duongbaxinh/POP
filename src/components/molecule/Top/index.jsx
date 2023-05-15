@@ -1,8 +1,8 @@
 import React from "react";
-import dataNewPhim from "../../../assets/data/dataNewPhim";
-import { ShopIcon } from "../../../assets/svg/ShopIcon";
-import Slidecard from "../../atom/Slidecard";
-import Card from "../../atom/Card";
+import dataNewPhim from "@/assets/data/dataNewPhim";
+import { ShopIcon } from "@/assets/svg/ShopIcon";
+import Slidecard from "@/components/atom/Slidecard";
+import Card from "@/components/atom/Card";
 import { SwiperSlide } from "swiper/react";
 Top.propTypes = {};
 function Top(props) {

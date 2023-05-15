@@ -1,11 +1,12 @@
 import React from "react";
 import { SwiperSlide } from "swiper/react";
-import { ShopIcon } from "../../../assets/svg/ShopIcon";
-import dataLive from "../../../assets/data/dataLive";
-import Card from "../../atom/Card";
-import Slidecard from "../../atom/Slidecard";
+import { ShopIcon } from "@/assets/svg/ShopIcon";
+import dataLive from "@/assets/data/dataLive";
+import Card from "@/components/atom/Card";
+import Slidecard from "@/components/atom/Slidecard";
+import { Link } from "@mui/material";
 
-function LiveStream(props) {
+function LiveStream({ data }) {
   return (
     <Slidecard
       nameCard={"LiveStream"}
@@ -21,17 +22,20 @@ function LiveStream(props) {
         />
       }
     >
-      {dataLive.map(({ id, title, imageUrl }) => (
-        <SwiperSlide key={id}>
-          <Card
-            title={title}
-            Urlimage={imageUrl}
-            anouncement={"sẽ diễn ra"}
-            width={"203px"}
-            height={"114px"}
-          />
-        </SwiperSlide>
-      ))}
+      {data !== null &&
+        data.map(({ id, name, avatar }) => (
+          <SwiperSlide key={id}>
+            <Link href={`/watch/${id}`}>
+              <Card
+                title={name}
+                Urlimage={avatar}
+                anouncement={"sẽ diễn ra"}
+                width={"203px"}
+                height={"114px"}
+              />
+            </Link>
+          </SwiperSlide>
+        ))}
     </Slidecard>
   );
 }

@@ -5,11 +5,12 @@ import React from "react";
 Myform.propTypes = {};
 
 function Myform(props) {
-  const { TitleButton } = props;
+  const { TitleButton, handleSumited } = props;
   return (
-    <Stack width="100%" gap="16px" component="form">
+    <Stack width="100%" gap="16px" component="form" onSubmit={handleSumited}>
       {props.children}
       <Button
+        type="submit"
         variant="contained"
         sx={{
           height: "44px",

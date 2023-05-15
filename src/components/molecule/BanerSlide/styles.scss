@@ -13,6 +13,12 @@
   height: 600px;
   position: relative;
   z-index: 0;
+  @include maxWith(1030px) {
+    height: 450px;
+  }
+  @include maxWith(900px) {
+    height: 350px;
+  }
   .banner-slide__item {
     position: absolute;
     width: 100%;

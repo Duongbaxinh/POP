@@ -2,7 +2,7 @@ const listImage = [
     {
         id: 1,
         title: 'Dragon Quest: Chuyến Phiêu Lưu Của Dai - Tập 35: Sự cố ở trận chung kết',
-        imageUrl: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1680575291/POP/no4-88561bb5111f-1669794584520-WAhs4AXb_yuamjn.webp',
+        imageUrl: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1683896849/learn_nodejs_sequelize/kr24osr597uwqd97nxcj.jpg',
         des: '21/3/2023 12:00'
     },
     {

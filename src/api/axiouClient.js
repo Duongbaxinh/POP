@@ -8,9 +8,8 @@ axiousClinet.interceptors.request.use(async (config) => {
 })
 axiousClinet.interceptors.response.use(
     (response) => {
-
         if (response && response.data) {
-            return response
+            return response.data
         }
     }
 )
