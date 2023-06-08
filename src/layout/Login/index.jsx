@@ -1,30 +1,54 @@
 import {
+  Alert,
   Box,
   Divider,
   IconButton,
   Stack,
   Typography,
-  useTheme,
+  useTheme
 } from "@mui/material";
-import { grey, red } from "@mui/material/colors";
-import React, { useState } from "react";
+import { green, grey, red } from "@mui/material/colors";
+import React from "react";
 import { FacebookIcon } from "../../assets/svg/FacebookIcon";
 import { GoogleIcon } from "../../assets/svg/GoogleIcon";
 import { VisibilityIcon } from "../../assets/svg/VisibilityIcon";
 import { VisibilityOffIcon } from "../../assets/svg/VisibilityOffIcon";
 import Myform from "../../components/atom/Myform";
-import TemplatForm from "../../components/atom/TemplatForm";
-import them from "../../components/theme/them";
 import MyTextFile from "../../components/atom/MytTextFile";
-
+import TemplatForm from "../../components/atom/TemplatForm";
+import bodyData from "../../hooks/useBody";
+import useSubmited from "../../hooks/useSubmit";
 function Login() {
+  const colors = useTheme()
   const Sociaty = [
-    <FacebookIcon fontSize="large" htmlColor={them.palette.blue.main} />,
-    <GoogleIcon fontSize="large" htmlColor={them.palette.blue.main} />,
+    <FacebookIcon fontSize="large" htmlColor={colors.palette.blue.main} />,
+    <GoogleIcon fontSize="large" htmlColor={colors.palette.blue.main} />,
   ];
+
+  const { dataUser, handleEmail, handlePassowrd, handleValideUserData, valideUserData } = bodyData();
+  const { message, handleSumited } = useSubmited('login', dataUser, handleValideUserData, '/')
 
   return (
     <TemplatForm>
+      {message.status && <Alert sx={{
+        position: "fixed",
+        top: "80px",
+        right: "10px",
+        width: "350px",
+        height: "80px",
+        backgroundColor: green[400],
+        color: grey[900]
+      }} severity="success">{message.message}</Alert>
+      }
+      {message.status === false && <Alert sx={{
+        position: "fixed",
+        top: "80px",
+        right: "10px",
+        width: "350px",
+        height: "80px",
+        backgroundColor: red[400],
+        color: grey[900]
+      }} severity="error">{message.message}</Alert>}
       <Stack
         position="absolute"
         top="38px"
@@ -32,8 +56,8 @@ function Login() {
         zIndex="3"
         alignItems="flex-start"
         sx={{
-          width: "520px",
-          backgroundColor: them.palette.bg_form.main,
+          width: { xs: "450px", md: "520px" },
+          backgroundColor: colors.palette.bg_form.main,
           borderRadius: "10px",
           padding: "50px 70px",
           textAlign: "center",
@@ -47,11 +71,16 @@ function Login() {
             Bạn có thể đăng nhập với tài khoản POPS hoặc POPS Kids.
           </Typography>
         </Stack>
-        <Myform TitleButton={"Đăng Nhập"}>
-          <MyTextFile placeholder={"Nhập username"} />
+        <Myform TitleButton={"Đăng Nhập"} handleSumited={handleSumited}>
+          <MyTextFile placeholder={"Nhập username"} handleEmail={handleEmail}
+            valideUserData={valideUserData.email}
+            message={'email invalide'} />
           <MyTextFile
             placeholder={"Nhập mật khẩu"}
             typeInput={"password"}
+            handleEmail={handlePassowrd}
+            valideUserData={valideUserData.password}
+            message={'password incorect'}
             VisibilityIcon={[
               <VisibilityIcon htmlColor={useTheme().palette.my_white.main} />,
               <VisibilityOffIcon
@@ -88,7 +117,7 @@ function Login() {
               />
             </Box>
 
-            <Typography variant="h3">Dang nhap bang ma QR</Typography>
+            <Typography variant="h3">Đăng Nhập Bằng Mã QR</Typography>
           </Stack>
           <Divider
             textAlign="center"
@@ -116,12 +145,13 @@ function Login() {
             {Sociaty.map((icon, index) => (
               <IconButton
                 key={index}
+                href={`/login/google`}
                 sx={{
                   width: "64px",
                   height: "64px",
-                  background: them.palette.my_white.main,
+                  background: colors.palette.my_white.main,
                   "&:hover": {
-                    background: them.palette.my_white.main,
+                    background: colors.palette.my_white.main,
                   },
                 }}
               >

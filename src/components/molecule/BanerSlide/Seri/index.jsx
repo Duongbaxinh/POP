@@ -1,13 +1,19 @@
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import seri from "@/assets/data/imagelist";
 import "./styles.scss";
+import { Link } from "@mui/material";
 
 function Seri(props) {
-  const numberClick = (seri.length * 187) / (5 * (187 + 41 * 2 - 41));
+  const [click, setClick] = useState(0);
+  const { dataSeri } = props;
+  const numberClick = (dataSeri?.length * 187) / (5 * (187 + 41 * 2 - 41)); // số thẻ * với chiều rộng / cho (số thẻ * chiều rộng + gap - khoảng các đầu = số lần click)
+  useEffect(() => {
+    setClick(Math.round(+numberClick))
+    console.log("numberClick", click)
+  }, [numberClick])
   const [translate, setTranslate] = useState(0);
-  const [click, setClick] = useState(numberClick);
   const handleTranslateRight = () => {
     if (click - 1 > 0) {
       setTranslate(translate - 5 * (187 + 41 * 2 - 41));
@@ -20,6 +26,7 @@ function Seri(props) {
       setClick(click + 1);
     }
   };
+
   return (
     <div className="seri">
       <div className="seri__title">
@@ -39,9 +46,9 @@ function Seri(props) {
           className="seri__list"
           style={{ transform: `translateX(${translate}px)`, listStyle: "none" }}
         >
-          {seri.map(({ id, ImageUrl }) => (
-            <li key={id} className="seri__item">
-              <img src={ImageUrl} alt="" />
+          {dataSeri?.map(({ id, title, avatar3 }) => (
+            <li key={id} className="seri__item"
+            ><a href={`/search/${title}`}><img src={avatar3} alt="" /></a>
             </li>
           ))}
         </ul>

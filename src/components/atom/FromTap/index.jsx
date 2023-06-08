@@ -11,7 +11,7 @@ function FormTap(props) {
           <Box
             sx={{
               width: "272px",
-              height: "153px",
+              height: "auto",
               overflow: "hidden",
               borderRadius: "5px",
               "&:hover": {
@@ -25,8 +25,8 @@ function FormTap(props) {
             }}
           >
             <img
-              src={data.avatar}
-              alt={data.avatar}
+              src={data.image.url}
+              alt={data.image}
               style={{
                 width: "100%",
                 height: "100%",

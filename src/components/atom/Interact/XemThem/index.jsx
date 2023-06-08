@@ -19,23 +19,18 @@ function XemThem(props) {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const { data } = await listFilm.getQueryMove({
-          name: queryName,
-          limit: 5,
-        });
-
-        setData(data);
+        const { response } = await listFilm.getList();
+        setData(response);
       } catch (error) {
         console.log(error);
       }
     };
     loadData();
   }, []);
-  console.log("data xem them", data);
   return (
     <Box
       p="32px"
-      width="770px"
+      width={{ xs: "100%", lg: "770px" }}
       m="0 auto"
       borderRadius="10px"
       sx={{
@@ -45,13 +40,13 @@ function XemThem(props) {
       {data &&
         data.map((item, index) => (
           <Box
-            key={item.id}
+            key={item._id}
             color={them.palette.my_white.main}
             sx={{
               textDecorationLine: "none",
             }}
             component={Link}
-            href={`/watch/${item.id}`}
+            href={`/watch/${item._id}`}
           >
             <FormTap data={item}>
               <Typography variant="subtitle2">
@@ -64,8 +59,8 @@ function XemThem(props) {
                 Nội Dung Bởi: TMS Entertainment
               </Typography>
               <Typography variant="subtitle2">
-                Thám Tử Lừng Danh Conan được mua bản quyền và được cập nhật phát
-                sóng mới nhất trên ứng dụng giải trí POPS. Đây là bộ
+                {`${item.name} được mua bản quyền và được cập nhật phát
+                sóng mới nhất trên ứng dụng giải trí POPS.`}
               </Typography>
             </FormTap>
           </Box>

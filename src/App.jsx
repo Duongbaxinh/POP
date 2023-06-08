@@ -1,34 +1,35 @@
 import { ThemeProvider } from "@mui/material/styles";
-import { BrowserRouter, Routes, Route, redirect } from "react-router-dom";
-import React from "react";
-import Hompage from "./components/macromolecule/Homepage";
-import them from "./components/theme/them";
-import Register from "./layout/Register";
-import Login from "./layout/Login";
-import Watch from "./components/macromolecule/Watch";
+import React, { lazy } from "react";
 import Header from "./layout/Header";
-import Footer from "./layout/Footer";
-import Views from "./components/macromolecule/Views";
-import Admind from "./components/Amind";
-import ListSearch from "./components/macromolecule/ListSearch";
+// import Footer from "./layout/Footer/MyList";
+import them from "./theme/theme";
+import ListSearch from "./page/ListSearch";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Hompage from "./page/Homepage";
+import Login from "./layout/Login";
+import Register from "./layout/Register";
+
+
+
 function App() {
-  const path = window.location.pathname;
   return (
+    // <Test />
     <ThemeProvider theme={them}>
-      {path !== "/admin" ? <Header /> : ""}
+      <Header />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Hompage />} />
-          <Route path="/watch/views/:id" element={<Views />} />
+          {/* <Route path="/watch/views/:id" element={<Views />} /> */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/watch/:id" element={<Watch />} />{" "}
-          <Route path="/admin" element={<Admind />} />
+          {/* <Route path="/watch/:id" element={<Watch />} />{" "} */}
           <Route path="/search/:id" element={<ListSearch />} />
         </Routes>
       </BrowserRouter>
-      {path !== "/admin" ? <Footer /> : ""}
+      {/* <Footer /> */}
     </ThemeProvider>
+
+
   );
 }
 

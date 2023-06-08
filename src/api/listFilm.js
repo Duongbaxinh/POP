@@ -3,7 +3,7 @@ import axiousClinet from '../api/axiouClient';
 const listFilm = {
     getList: async () => {
         try {
-            const url = `http://localhost:8080/api/v1/movies`
+            const url = `http://localhost:5000/api/v1/movies`
             return axiousClinet.get(url)
         } catch (error) {
             console.log(error)
@@ -12,14 +12,16 @@ const listFilm = {
     },
     getDetai: async (id) => {
         try {
-            const url = `http://localhost:8080/api/v1/movies/${id}`
+            const url = `http://localhost:5000/api/v1/movies/${id}`
+            console.log(url)
             return axiousClinet.get(url)
         } catch (error) {
             console.log(error)
         }
 
     },
-    getQueryMove: async (param) => {
+    getQueryMovie: async (param) => {
+        console.log(param)
         try {
             const url = `http://localhost:8080/api/v1/search`
             return axiousClinet.get(url, { params: param })

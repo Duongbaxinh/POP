@@ -1,14 +1,3 @@
-import {
-  Box,
-  Divider,
-  IconButton,
-  Stack,
-  Typography,
-  useTheme,
-} from "@mui/material";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import author from "@/api/author";
 import { FacebookIcon } from "@/assets/svg/FacebookIcon";
 import { GoogleIcon } from "@/assets/svg/GoogleIcon";
 import { VisibilityIcon } from "@/assets/svg/VisibilityIcon";
@@ -16,45 +5,54 @@ import { VisibilityOffIcon } from "@/assets/svg/VisibilityOffIcon";
 import Myform from "@/components/atom/Myform";
 import MyTextFile from "@/components/atom/MytTextFile";
 import TemplatForm from "@/components/atom/TemplatForm";
-import them from "@/components/theme/them";
+import {
+  Alert,
+  Box,
+  Divider,
+  IconButton,
+  Stack,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import { green, grey, red } from "@mui/material/colors";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import bodyData from "../../hooks/useBody";
+import useSubmited from "../../hooks/useSubmit";
 function Register() {
+  const colors = useTheme()
   const Sociaty = [
-    <FacebookIcon fontSize="large" htmlColor={them.palette.blue.main} />,
-    <GoogleIcon fontSize="large" htmlColor={them.palette.blue.main} />,
+    <FacebookIcon fontSize="large" htmlColor={colors.palette.blue.main} />,
+    <GoogleIcon fontSize="large" htmlColor={colors.palette.blue.main} />,
   ];
+
+  const { dataUser, handleEmail, handlePassowrd, handleVerifyPassword, handleValideUserData, valideUserData } = bodyData();
   const navigateTo = useNavigate();
-  const [value, setValue] = useState({
-    email: "",
-    password: "",
-    verifyPassowrd: "",
-  });
-  const handleEmail = (e) => {
-    const v = e.target.value;
-    setValue({ ...value, email: v });
-  };
-  const handlePassowrd = (e) => {
-    const v = e.target.value;
-    setValue({ ...value, password: v });
-  };
-  const handleVerifyPassword = (e) => {
-    const v = e.target.value;
-    setValue({ ...value, verifyPassowrd: v });
-  };
-  const handleSumited = (e) => {
-    e.preventDefault();
-    const register = async () => {
-      try {
-        const { data } = await author.register({ ...value });
-        navigateTo("/login");
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    register();
-  };
+  const { message, handleSumited } = useSubmited('Register', dataUser, handleValideUserData, '/login')
+  console.log('sumt', message)
 
   return (
     <TemplatForm>
+
+      {message.status && <Alert sx={{
+        position: "fixed",
+        top: "80px",
+        right: "10px",
+        width: "350px",
+        height: "80px",
+        backgroundColor: green[400],
+        color: grey[900]
+      }} severity="success">{message.message}</Alert>
+      }
+      {message.status === false && <Alert sx={{
+        position: "fixed",
+        top: "80px",
+        right: "10px",
+        width: "350px",
+        height: "80px",
+        backgroundColor: red[400],
+        color: grey[900]
+      }} severity="error">{message.message}</Alert>}
       <Stack
         position="absolute"
         top="38px"
@@ -62,13 +60,14 @@ function Register() {
         zIndex="3"
         alignItems="flex-start"
         sx={{
-          width: "520px",
-          backgroundColor: them.palette.bg_form.main,
+          width: { xs: "450px", md: "520px" },
+          backgroundColor: colors.palette.bg_form.main,
           borderRadius: "10px",
           padding: "50px 70px",
           textAlign: "center",
         }}
       >
+
         <Stack gap="16px">
           <Typography variant="h2" lineHeight="36px">
             Đăng Ký
@@ -80,13 +79,17 @@ function Register() {
         </Stack>
         <Myform TitleButton={"Đăng Ký"} handleSumited={handleSumited}>
           <MyTextFile
-            placeholder={"Nhập username hoặc số điện thoại"}
+            placeholder={"Nhập email"}
             handleEmail={handleEmail}
+            valideUserData={valideUserData.email}
+            message={'email invalide'}
           />
           <MyTextFile
             placeholder={"Nhập mật khẩu"}
             typeInput={"password"}
             handleEmail={handlePassowrd}
+            valideUserData={valideUserData.password}
+            message={'password invalide'}
             VisibilityIcon={[
               <VisibilityIcon htmlColor={useTheme().palette.my_white.main} />,
               <VisibilityOffIcon
@@ -98,6 +101,8 @@ function Register() {
             placeholder={"Nhập lại mật khẩu"}
             handleEmail={handleVerifyPassword}
             typeInput={"password"}
+            message={'verify password invalide'}
+            valideUserData={valideUserData.verifyPassword}
             VisibilityIcon={[
               <VisibilityIcon htmlColor={useTheme().palette.my_white.main} />,
               <VisibilityOffIcon
@@ -151,9 +156,9 @@ function Register() {
                 sx={{
                   width: "64px",
                   height: "64px",
-                  background: them.palette.my_white.main,
+                  background: colors.palette.my_white.main,
                   "&:hover": {
-                    background: them.palette.my_white.main,
+                    background: colors.palette.my_white.main,
                   },
                 }}
               >
@@ -166,7 +171,7 @@ function Register() {
           </Typography>
         </Stack>
       </Stack>
-    </TemplatForm>
+    </TemplatForm >
   );
 }
 

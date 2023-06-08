@@ -5,7 +5,15 @@ import { red } from "@mui/material/colors";
 MyTextFile.propTypes = {};
 
 function MyTextFile(props) {
-  const { placeholder, VisibilityIcon, typeInput, handleEmail, hepper } = props;
+  const {
+    placeholder,
+    VisibilityIcon,
+    typeInput,
+    handleEmail,
+    message,
+    propery,
+    valideUserData
+  } = props;
   const theme = useTheme();
   const [password, setPassword] = useState(true);
   const [value, setValue] = useState("");
@@ -18,20 +26,23 @@ function MyTextFile(props) {
       fullWidth
       size="small"
       placeholder={`${placeholder}`}
-      onChange={handleEmail}
+      onChange={(e) => {
+        handleEmail(e, propery);
+      }}
       type={`${password ? typeInput : "text"}`}
-      helperText={hepper !== "" && hepper}
+      error={valideUserData === false}
+      helperText={valideUserData === false ? message : undefined}
       InputProps={
         VisibilityIcon
           ? {
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={handlePassword}>
-                    {password ? VisibilityIcon[1] : VisibilityIcon[0]}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={handlePassword}>
+                  {password ? VisibilityIcon[1] : VisibilityIcon[0]}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }
           : null
       }
       sx={{

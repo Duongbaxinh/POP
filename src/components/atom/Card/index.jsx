@@ -5,10 +5,6 @@ Card.propTypes = {};
 
 function Card(props) {
   const theme = useTheme();
-  /** Urlimage ảnh nền của card
-     title tiêu đề của card
-     form 
-  */
   const { Urlimage, title, height, width, form, chapter, anouncement, top } =
     props;
   const anounce = (anouncement) => {
@@ -84,12 +80,12 @@ function Card(props) {
   return (
     <Box>
       <Box>
-        <BoxCard height={height} position="relative">
+        <BoxCard height={height} width={width} position="relative">
           <img
             src={Urlimage}
             width="100%"
             height="100%"
-            style={{ transition: "0.25s ease", borderRadius: "5px" }}
+            style={{ transition: "0.25s ease", borderRadius: "5px", minWidth: "174px" }}
           />
           {anouncement && anounce(anouncement)}
         </BoxCard>

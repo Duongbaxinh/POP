@@ -33,7 +33,7 @@ function Tap({ data }) {
   };
   return (
     <Box
-      width="770px"
+      width={{ xs: "100%", lg: "770px" }}
       margin="0 auto"
       p="32px"
       borderRadius="10px"
@@ -75,8 +75,8 @@ function Tap({ data }) {
             sx={
               appear
                 ? {
-                    backgroundColor: grey[900],
-                  }
+                  backgroundColor: grey[900],
+                }
                 : { display: "none", backgroundColor: grey[900] }
             }
           >
@@ -104,12 +104,12 @@ function Tap({ data }) {
           textDecorationLine: "none",
         }}
         component={Link}
-        href={`/watch/views/${data.id}`}
+        href={`/watch/views/${data._id}`}
       >
         <FormTap data={data}>
           <Stack direction="row" justifyContent="space-between">
             <Stack direction="row" alignItems="center" justifyContent="center">
-              <RefreshIcon htmlColor={grey} />
+              <RefreshIcon htmlColor={grey[500]} />
               <Typography variant="body2" component="span">
                 {Data.time}
               </Typography>

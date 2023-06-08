@@ -4,8 +4,9 @@ import { ShopIcon } from "@/assets/svg/ShopIcon";
 import Slidecard from "@/components/atom/Slidecard";
 import Card from "@/components/atom/Card";
 import { SwiperSlide } from "swiper/react";
+import { Link } from "@mui/material";
 Top.propTypes = {};
-function Top(props) {
+function Top({ data }) {
   return (
     <Slidecard
       nameCard={"Top"}
@@ -21,15 +22,17 @@ function Top(props) {
         />
       }
     >
-      {dataNewPhim.map(({ id, title, imageUrl, top }) => (
+      {data?.map(({ id, name, avatar }, index) => (
         <SwiperSlide key={id} style={{ flexShrink: 1 }}>
-          <Card
-            title={title}
-            Urlimage={imageUrl}
-            top={top}
-            width={"203px"}
-            height={"304px"}
-          />
+          <Link href={`/watch/${id}`}>
+            <Card
+              title={name}
+              Urlimage={avatar}
+              top={index + 1}
+              width={"212px"}
+              height={"304px"}
+            />
+          </Link>
         </SwiperSlide>
       ))}
     </Slidecard>

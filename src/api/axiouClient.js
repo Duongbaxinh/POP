@@ -1,7 +1,8 @@
 import axious from 'axios'
 
 const axiousClinet = axious.create({
-    URL: '/'
+    URL: '/',
+
 })
 axiousClinet.interceptors.request.use(async (config) => {
     return config;

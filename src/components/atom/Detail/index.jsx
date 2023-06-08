@@ -10,11 +10,6 @@ function Detail(props) {
   const handleFull = () => {
     setFull(!full);
   };
-  // /**
-  // Data dữ liệu lấy từ thẻ cha
-  // exeption loại trừ những trường không muốn in ra ở phần mô tả
-  // link những nhận biết những trường nào được gắn link trong phần mô tả phim
-  // */
   const { Data, exeption, link } = props;
   const lable = {
     link: (item) => (

@@ -8,4 +8,14 @@ export default defineConfig({
       "@": new URL('src/', import.meta.url).pathname,
     },
   },
+  server: {
+    proxy: {
+      '/login/google': {
+        target: 'http://localhost:8080/api/v1/auth/google',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/login\/google/, ''),
+      },
+    },
+  },
+
 })

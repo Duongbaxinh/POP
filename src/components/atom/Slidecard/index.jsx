@@ -21,8 +21,9 @@ Slidecard.propTypes = {};
 function Slidecard(props) {
   const theme = useTheme();
   const sxPoint = theme.breakpoints.values.xs;
-  const lgPoint = theme.breakpoints.values.lg;
   const smPoint = theme.breakpoints.values.sm;
+  const mdPoint = theme.breakpoints.values.md;
+  const lgPoint = theme.breakpoints.values.lg;
   const xlPoint = theme.breakpoints.values.xl;
   /*
     title tên của slide
@@ -101,9 +102,13 @@ function Slidecard(props) {
             slidesPerView: 2,
             slidesPerGroup: 2,
           },
-          [smPoint]: {
+          [mdPoint]: {
             slidesPerView: 4,
             slidesPerGroup: 4,
+          },
+          [smPoint]: {
+            slidesPerView: 3,
+            slidesPerGroup: 3,
           },
           [lgPoint]: {
             slidesPerView: preView,

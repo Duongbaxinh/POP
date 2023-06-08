@@ -1,14 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Box, Stack, Typography, Link, useTheme } from "@mui/material";
+import { Box, Link, Stack, Typography, useTheme } from "@mui/material";
 import { grey } from "@mui/material/colors";
-
+import React from "react";
 BoxSearch.propTypes = {};
-
 function BoxSearch({ searchData }) {
   const theme = useTheme();
   return (
-    <Stack gap="10px">
+    <Stack gap="10px" flexGrow="1">
       <Typography
         variant="subtitle1"
         sx={{
@@ -25,9 +22,9 @@ function BoxSearch({ searchData }) {
           width: "auto",
         }}
       >
-        {searchData.map((item) => (
+        {searchData?.map((item, index) => (
           <Link
-            key={item.id}
+            key={index}
             href={`/search/${item.name}`}
             sx={{
               textDecorationLine: "none",
@@ -42,7 +39,7 @@ function BoxSearch({ searchData }) {
                 borderRadius: "5px",
                 background: grey[800],
               }}
-              key={item.id}
+              key={item._id}
             >
               {item.name}
             </Typography>

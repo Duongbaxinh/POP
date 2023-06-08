@@ -12,9 +12,9 @@ Interact.propTypes = {};
 function Interact({ Data }) {
   const Select = ["Tập", "Xem thêm", "Bình luận"];
   const Component = [
-    <Tap data={Data} />,
-    <XemThem queryName={Data.mainName} />,
-    <Comment />,
+    <Tap key={1} data={Data} />,
+    <XemThem key={2} queryName={Data.mainName} />,
+    <Comment key={3} />,
   ];
   const [isActive, setIsActive] = useState(1);
   const handleFull = () => {
