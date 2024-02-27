@@ -1,11 +1,12 @@
-import { Box, Typography, Link } from "@mui/material";
+import { Box, Typography, Link, useTheme } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import React, { Component, useEffect, useState } from "react";
 import FormTap from "../../FromTap";
-import listFilm from "../../../../api/listFilm";
-import them from "../../../theme/them";
+import movie from "@/api/movieApi";
+import { seriData } from "../../../../lib/data/seri.data";
 
-XemThem.propTypes = {};
+
+
 const Data = {
   name: `Thám Tử Lừng Danh Conan: Câu Chuyện Về Haibara Ai ~ Chuyến Tàu Sắt
   Bí Ẩn Màu Đen ~ Tập full`,
@@ -14,12 +15,13 @@ const Data = {
     "https://pops-images-vn.akamaized.net/api/v2/containers/file2/cms_thumbnails/horizontal_poster-9fe8f0f24ace-1680747333183-4h5vYtqd.jpg?v=0&maxW=460&format=webp",
 };
 function XemThem(props) {
+  const colors = useTheme()
   const { queryName } = props;
   const [data, setData] = useState(null);
   useEffect(() => {
     const loadData = async () => {
       try {
-        const { response } = await listFilm.getList();
+        const { response } = await movie.getList();
         setData(response);
       } catch (error) {
         console.log(error);
@@ -37,11 +39,12 @@ function XemThem(props) {
         backgroundColor: grey[900],
       }}
     >
-      {data &&
-        data.map((item, index) => (
+      {/* ---------------- */}
+      {seriData &&
+        seriData.map((item, index) => (
           <Box
             key={item._id}
-            color={them.palette.my_white.main}
+            color={colors.palette.my_white.main}
             sx={{
               textDecorationLine: "none",
             }}

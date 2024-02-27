@@ -3,13 +3,12 @@ import PropTypes from "prop-types";
 import Tap from "./Tap";
 import XemThem from "./XemThem";
 import Comment from "./Comment";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography, useTheme } from "@mui/material";
 import { grey, red } from "@mui/material/colors";
-import them from "../../theme/them";
 
-Interact.propTypes = {};
 
 function Interact({ Data }) {
+  const colors = useTheme()
   const Select = ["Tập", "Xem thêm", "Bình luận"];
   const Component = [
     <Tap key={1} data={Data} />,
@@ -41,7 +40,7 @@ function Interact({ Data }) {
             key={index}
             sx={{
               cursor: "pointer",
-              color: isActive === index ? red[200] : them.palette.my_white.main,
+              color: isActive === index ? red[200] : colors.palette.my_white.main,
             }}
           >
             {item}

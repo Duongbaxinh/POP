@@ -1,11 +1,12 @@
-import { Box, Link, Stack, Typography } from "@mui/material";
+import { Box, Link, Stack, Typography, useTheme } from "@mui/material";
 import { grey, red } from "@mui/material/colors";
 import React, { useState } from "react";
-import them from "@/components/theme/them";
 
-Detail.propTypes = {};
+
 
 function Detail(props) {
+  console.log('check prop data ', props.Data)
+  const colors = useTheme()
   const [full, setFull] = useState(true);
   const handleFull = () => {
     setFull(!full);
@@ -43,18 +44,18 @@ function Detail(props) {
       direction="row"
       gap="20px"
       mb="73px"
-      sx={{
-        flexWrap: { xs: "wrap-reverse", md: "nowrap" },
-      }}
+      flexWrap='nowrap'
     >
       {" "}
-      <Box width="90%">
+      <Box flex='1'>
         <Typography
           variant="subtitle1"
-          overflow="hidden"
-          textOverflow="ellipsis"
           sx={{
-            height: `${!full ? "auto" : "144px"}`,
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            display: "-webkit-box",
+            WebkitBoxOrient: "vertical",
+            WebkitLineClamp: `${full ? 4 : ''}`,
           }}
         >
           <Typography component="span" variant="subtitle1" color={grey[500]}>
@@ -65,7 +66,7 @@ function Detail(props) {
 
         <Typography
           variant="subtitle1"
-          color={them.palette.my_white.main}
+          color={colors.palette.my_white.main}
           onClick={handleFull}
           style={{
             cursor: "pointer",

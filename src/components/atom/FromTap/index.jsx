@@ -25,7 +25,8 @@ function FormTap(props) {
             }}
           >
             <img
-              src={data.image.url}
+              src={data.avatar}
+              // src={data.image.url}
               alt={data.image}
               style={{
                 width: "100%",

@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import React, { useEffect, useState } from "react";
-import author from "../../api/author";
 import BoxSearch from "../../components/atom/BoxSearch";
 import InforUser from "./atomHeader/InforUser";
 import "./styles.scss";
@@ -71,6 +70,7 @@ function Header(props) {
     logOut()
   }
   const handleMenu = () => {
+    console.log('run at here')
     if (window.innerWidth <= 1200) {
       setClickMenu(!clickMenu);
     } else {

@@ -60,6 +60,7 @@
   &__menu-icon {
     display: none;
     color: $white;
+    cursor: pointer;
     @include maxWith($md) {
       display: block;
     }

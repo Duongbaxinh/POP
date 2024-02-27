@@ -24,14 +24,10 @@ const bodyData = () => {
     setData({ ...dataUser, ["verifyPassword"]: e.target.value });
   };
   const handleValideUserData = (userData) => {
-    let valide = {};
-    if (userData.email === '' || !userData.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)) {
-      valide.email = false
-    }
-    if (userData.password === '' || userData.password.length < 6) {
-      valide.password = false
-    }
-
+    let valide = { 
+     email: userData.email !== '' && /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(userData.email),
+    password: userData.password !== '' && userData.password.length >= 6
+    };
     setValideUserData(valide)
     return valide
   }

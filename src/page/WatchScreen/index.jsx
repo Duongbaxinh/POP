@@ -1,13 +1,18 @@
-import { Box, Link, Stack, Typography } from "@mui/material";
-import React, { useState } from "react";
+import { Box, Link, Stack, Typography, useTheme } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import movie from "../../api/movieApi";
 import { ShareIcon } from "@/assets/svg/ShareIcon";
 import Detail from "@/components/atom/Detail";
-import them from "@/components/theme/them";
-
 import { AppIcon } from "@/assets/svg/AppIcon";
 import Interact from "@/components/atom/Interact";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-function Banner({ data }) {
+function WatchScreen() {
+  const colors = useTheme()
+  const [data, setData] = useState()
+  const [isLoading, setIsLoading] = useState(true)
+  const id = useParams()
   const link = ["genre", "country"];
   const exeption = [
     "description",
@@ -17,12 +22,27 @@ function Banner({ data }) {
     "video",
     "avatar",
     "image",
-    "_id",
+    "id",
     "time",
     "mainName",
+    "trailler",
+    "seriData"
   ];
-
+  const datam = useSelector((state) => state)
+  useEffect(() => {
+    setIsLoading(true)
+    const fetchData = async () => {
+      const { response } = await movie.getDetai(id)
+      console.log('response ::::', response)
+      setData(response)
+      setIsLoading(false)
+    }
+    fetchData()
+  }, [id])
+  if (isLoading) return <h1>Loading...</h1>
+  console.log('check data use selector', datam)
   return (
+
     <Box>
       <Stack width="100%" position="relative">
         <Stack
@@ -31,7 +51,7 @@ function Banner({ data }) {
           top="0"
           left="0"
           sx={{
-            backgroundImage: `url(${data.avatar.url})`,
+            backgroundImage: `url(${data?.avatar})`,
             objectFit: "contain",
             backgroundPositionY: "-200px",
             backgroundSize: "100%",
@@ -49,27 +69,18 @@ function Banner({ data }) {
         <Box position="relative" top="-150px">
           <Stack width="100%" height="100%" padding=" 0 70px" gap="20px">
             <Stack gap="20px">
-              <Typography variant="h1">
-                {" "}
-                {data.mainName}~{data.name}{" "}
-                <AppIcon htmlColor={them.palette.my_white.main} />
+              <Typography variant="h1" >
+                {data.seriData.title}~{data?.name}{" "}
+                <AppIcon htmlColor={colors.palette.my_white.main} />
               </Typography>{" "}
               <Stack direction="row" gap="5px">
                 <Typography variant="subtitle1">Tập mới nhất</Typography>
                 <Link
-                  href={`/watch/views/${data._id}`}
+                  href={`/views/${data?.id}`}
                   variant="subtitle1"
-                  color={them.palette.blue.main}
+                  color={colors.palette.blue.main}
                 >
                   Tập full
-                </Link>
-                <Link
-                  href="login"
-                  variant="subtitle1"
-                  color={them.palette.blue.main}
-                >
-                  {" "}
-                  Trallers
                 </Link>
               </Stack>
             </Stack>
@@ -103,4 +114,4 @@ function Banner({ data }) {
   );
 }
 
-export default Banner;
+export default WatchScreen;

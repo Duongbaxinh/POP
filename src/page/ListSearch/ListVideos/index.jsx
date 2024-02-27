@@ -1,5 +1,6 @@
 
 import { Box, Link, Typography } from "@mui/material";
+import { seriData } from '../../../lib/data/seri.data'
 import React from "react";
 
 import Card from "@/components/atom/Card";
@@ -27,9 +28,10 @@ function ListVideos({ dataMovie, isLoading }) {
         xs: `calc(${100}%) `,
       }}
     >
-      {dataMovie?.length > 0 ? (
-        dataMovie?.map((item, index) => (
-          <Link key={index} href={`/ watch / ${item.id}`}>
+      {seriData?.length > 0 ? (
+        // ---------------
+        seriData.map((item, index) => (
+          <Link key={index} href={`/watch/${item.id}`}>
             {" "}
             <Card
               key={index}

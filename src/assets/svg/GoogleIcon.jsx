@@ -1,7 +1,7 @@
 import React from "react";
-import { SvgIcon, SvgIconProps } from "@mui/material";
+import { SvgIcon } from "@mui/material";
 
-export const GoogleIcon = (props: SvgIconProps) => {
+export const GoogleIcon = (props) => {
   return (
     <SvgIcon width="32px" height="32px" viewBox="0 0 32 32">
       <path

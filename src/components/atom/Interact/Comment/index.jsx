@@ -1,11 +1,12 @@
 import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
 import SpeakerNotesOutlinedIcon from "@mui/icons-material/SpeakerNotesOutlined";
-import { Box, Stack, TextField, Typography } from "@mui/material";
+import { Box, Stack, TextField, Typography, useTheme } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import React from "react";
-import them from "@/components/theme/them";
+
 
 function Comment(props) {
+  const colors = useTheme()
   const info = {
     avatar:
       "https://products.popsww.com/api/v2/containers/file2/profiles/Trex_12.jpg",
@@ -33,9 +34,9 @@ function Comment(props) {
             "& .MuiInputBase-root": {
               height: "40px",
               backgroundColor: grey[800],
-              borderColor: them.palette.my_white.main,
+              borderColor: colors.palette.my_white.main,
               "& input": {
-                color: them.palette.my_white.main,
+                color: colors.palette.my_white.main,
                 fontSize: "medium",
               },
             },

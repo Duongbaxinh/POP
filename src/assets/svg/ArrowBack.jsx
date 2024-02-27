@@ -1,6 +1,6 @@
+import { SvgIcon } from "@mui/material";
 import React from "react";
-import { SvgIcon, SvgIconProps } from "@mui/material";
-export const ArrowBack = (props: SvgIconProps) => {
+export const ArrowBack = (props) => {
   return (
     <SvgIcon
       {...props}

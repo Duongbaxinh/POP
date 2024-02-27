@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Seri from "./Seri";
 import "./styles.scss";
+import { seriData } from "../../../lib/data/seri.data";
 BanerSlide.propTypes = {};
 
 function BanerSlide(props) {
@@ -14,7 +15,7 @@ function BanerSlide(props) {
 
   useEffect(() => {
     const newTimeoutId = setTimeout(() => {
-      if (visible < data?.length - 1) {
+      if (visible < seriData?.length - 1) {
         setVisible(visible + 1);
       } else {
         clearTimeout(newTimeoutId);
@@ -28,7 +29,7 @@ function BanerSlide(props) {
   const { handleTranslateRight, handleTranslateleft, translate } = props;
   return (
     <div className="banner-slide">
-      {data?.map(({ id, avatar, avatar2, release }, index) => (
+      {seriData?.map(({ id, avatar, avatar2, release }, index) => (
         <div
           key={id}
           className={`banner-slide__item ${index != visible ? "visible" : ""}`}
@@ -48,7 +49,7 @@ function BanerSlide(props) {
         </div>
       ))}
       <ul className="banner-slide__list">
-        {data?.map(({ id }, index) => (
+        {seriData?.map(({ id }, index) => (
           <li
             className={`${index === visible ? "outStanding" : ""}`}
             key={id}

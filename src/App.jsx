@@ -1,13 +1,11 @@
 import { ThemeProvider } from "@mui/material/styles";
-import React, { lazy } from "react";
-import Header from "./layout/Header";
-// import Footer from "./layout/Footer/MyList";
-import them from "./theme/theme";
-import ListSearch from "./page/ListSearch";
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Header from "./layout/Header";
 import Hompage from "./page/Homepage";
-import Login from "./layout/Login";
-import Register from "./layout/Register";
+import them from "./theme/theme";
+import WatchScreen from "./page/WatchScreen";
+import ViewsScreen from "./page/ViewsScreen";
 
 
 
@@ -19,11 +17,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Hompage />} />
-          {/* <Route path="/watch/views/:id" element={<Views />} /> */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          {/* <Route path="/watch/:id" element={<Watch />} />{" "} */}
-          <Route path="/search/:id" element={<ListSearch />} />
+          {/* <Route path="/login" element={<Login />} /> */}
+          {/* <Route path="/register" element={<Register />} /> */}
+          <Route path="/watch/:id" element={<WatchScreen />} />
+          <Route path="/views/:id" element={<ViewsScreen />} />
+          {/* <Route path="/search/:id" element={<ListSearch />} />  */}
         </Routes>
       </BrowserRouter>
       {/* <Footer /> */}

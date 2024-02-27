@@ -11,7 +11,7 @@ const listSeri = {
     },
     getSeris: async () => {
         try {
-            const url = `http://localhost:5000/api/v1/seris`
+            const url = `http://localhost:8080/api/v1/seris`
             return axiousClinet.get(url)
         } catch (error) {
             console.log(error)

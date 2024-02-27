@@ -1,11 +1,10 @@
-import { Box, Stack, Typography, useTheme } from "@mui/material";
-import { useParams } from "react-router-dom";
-import React, { useEffect, useMemo, useState } from "react";
-import { red } from "@mui/material/colors";
-import Videos from "./Videos";
-import All from "./All";
-import listFilm from "@/api/listFilm";
 import useFetch from "@/hooks/useFetch";
+import { Box, Stack, Typography, useTheme } from "@mui/material";
+import { red } from "@mui/material/colors";
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+import All from "./All";
+import Videos from "./Videos";
 
 function ListSearch(props) {
   const colors = useTheme();
@@ -22,7 +21,6 @@ function ListSearch(props) {
       { _id: 1, component: <Videos key={1} dataMovie={data} isLoading={isLoading} /> }
     ]
   const Select = ["Tất Cả", "Videos", "Truyện Tranh"];
-  console.log(active)
   return (
     <Stack p="0 45px">
       <Stack

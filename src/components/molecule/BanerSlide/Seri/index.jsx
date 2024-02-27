@@ -1,9 +1,8 @@
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import React, { useEffect, useState } from "react";
-import seri from "@/assets/data/imagelist";
 import "./styles.scss";
-import { Link } from "@mui/material";
+import { seriData } from "../../../../lib/data/seri.data";
 
 function Seri(props) {
   const [click, setClick] = useState(0);
@@ -46,9 +45,14 @@ function Seri(props) {
           className="seri__list"
           style={{ transform: `translateX(${translate}px)`, listStyle: "none" }}
         >
-          {dataSeri?.map(({ id, title, avatar3 }) => (
+          {/* {seriData?.map(({ id, title, avatar3 }) => (
             <li key={id} className="seri__item"
             ><a href={`/search/${title}`}><img src={avatar3} alt="" /></a>
+            </li>
+          ))} */}
+          {seriData?.map(({ id, avatar, avatar2 }) => (
+            <li key={id} className="seri__item"
+            ><a href={`/search/${id}`}><img src={avatar} alt="" /></a>
             </li>
           ))}
         </ul>

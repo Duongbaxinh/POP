@@ -1,19 +1,18 @@
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import { Box, Divider, IconButton, Stack, Typography } from "@mui/material";
-import { grey, red } from "@mui/material/colors";
-import React, { useEffect, useState } from "react";
-import { AddIcon } from "@/assets/svg/AddIcon";
+import movie from "@/api/movieApi";
 import { AppIcon } from "@/assets/svg/AppIcon";
-import { LikeIcon } from "@/assets/svg/LikeIcon";
 import { ShareIcon } from "@/assets/svg/ShareIcon";
+import { AddIcon } from "@/assets/svg/AddIcon";
+import { LikeIcon } from "@/assets/svg/LikeIcon";
 import { TextIcon } from "@/assets/svg/TextIcon";
 import Detail from "@/components/atom/Detail";
 import Interact from "@/components/atom/Interact";
-import them from "@/components/theme/them";
-import listFilm from "@/api/listFilm";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import { Box, Divider, IconButton, Stack, Typography, useTheme } from "@mui/material";
+import { grey, red } from "@mui/material/colors";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-Views.propTypes = {};
+ViewsScreen.propTypes = {};
 
 const link = ["author", "Country", "Category"];
 const exeption = [
@@ -27,52 +26,53 @@ const exeption = [
   "id",
   "time",
   "mainName",
+  "trailler",
+  "seriData"
 ];
 
-function Views(props) {
-  const { id } = useParams();
+function ViewsScreen(props) {
+  const id = useParams();
   const [dataDetail, setDataDetail] = useState(null);
   useEffect(() => {
     const dataDetail = async () => {
       try {
-        const { response } = await listFilm.getDetai(id);
+        const { response } = await movie.getDetai(id);
         setDataDetail(response);
-        return response;
       } catch (error) {
         return error;
       }
     };
     dataDetail();
   }, []);
+  const theme = useTheme()
   const Icon = [
     {
       id: 1,
       name: "Thích",
-      icon: <LikeIcon htmlColor={them.palette.my_white.main} />,
+      icon: <LikeIcon htmlColor='white' />,
     },
     {
       id: 2,
       name: "Báo Lỗi",
-      icon: <TextIcon htmlColor={them.palette.my_white.main} />,
+      icon: <TextIcon htmlColor='white' />,
     },
     {
       id: 3,
       name: "Lưu Lại",
-      icon: <AddIcon htmlColor={them.palette.my_white.main} />,
+      icon: <AddIcon htmlColor='white' />,
     },
     {
       id: 4,
       name: "Chia Sẻ",
-      icon: <ShareIcon htmlColor={them.palette.my_white.main} />,
+      icon: <ShareIcon htmlColor='white' />,
     },
     { id: 5, name: "Tải POP App", icon: <AppIcon /> },
   ];
-
+  if (!dataDetail) return <h1>Loading...</h1>
   return (
     <Box pt="70px">
       {dataDetail && (
         <>
-          {" "}
           <Stack padding=" 0 75px" width="100%">
             <Box>
               <video
@@ -83,7 +83,7 @@ function Views(props) {
                   margin: "0 auto",
                 }}
               >
-                <source src={dataDetail.video.url} type="video/mp4" />
+                <source src={dataDetail.video} type="video/mp4" />
               </video>
             </Box>
           </Stack>
@@ -104,7 +104,7 @@ function Views(props) {
                 <Stack direction="row" gap="10px" mb="22px">
                   <YouTubeIcon />
                   <Typography variant="h3" color={red[800]}>
-                    {dataDetail.mainName}~{dataDetail.name}
+                    {dataDetail.seriData.title}~{dataDetail.name}
                   </Typography>
                 </Stack>
                 <Typography variant="h1">{dataDetail.name}</Typography>
@@ -138,11 +138,11 @@ function Views(props) {
             </Box>
 
             <Interact Data={dataDetail} />
-          </Box>{" "}
+          </Box>
         </>
       )}
     </Box>
   );
 }
 
-export default Views;
+export default ViewsScreen;

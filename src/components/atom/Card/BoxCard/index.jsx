@@ -1,6 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { Box } from "@mui/material";
+import React from "react";
 
 BoxCard.propTypes = {};
 

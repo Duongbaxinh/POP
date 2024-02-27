@@ -1,7 +1,7 @@
+import { SvgIcon } from "@mui/material";
 import React from "react";
-import { SvgIcon, SvgIconProps } from "@mui/material";
 
-export const AppIcon = (props: SvgIconProps) => {
+export const AppIcon = (props) => {
   return (
     <SvgIcon clipPath="url(#clip0)" width="24px" height="24px">
       <rect y="11.5" width="24" height="1.5" rx="0.75" fill="white"></rect>
